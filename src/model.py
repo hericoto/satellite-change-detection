@@ -31,7 +31,6 @@ class SiameseUNet(nn.Module):
     def __init__(self):
         super().__init__()
 
-        # Shared encoder
         self.enc1 = ConvBlock(3, 32)
         self.enc2 = ConvBlock(32, 64)
         self.enc3 = ConvBlock(64, 128)
@@ -41,7 +40,6 @@ class SiameseUNet(nn.Module):
 
         self.bottleneck = ConvBlock(256, 512)
 
-        # Decoder
         self.up4 = nn.ConvTranspose2d(512, 256, 2, 2)
         self.dec4 = ConvBlock(512, 256)
 
@@ -58,19 +56,19 @@ class SiameseUNet(nn.Module):
 
     def forward(self, image_a, image_b):
 
-        # Encode first image
+
         a1 = self.enc1(image_a)
         a2 = self.enc2(self.pool(a1))
         a3 = self.enc3(self.pool(a2))
         a4 = self.enc4(self.pool(a3))
 
-        # Encode second image using shared weights
+
         b1 = self.enc1(image_b)
         b2 = self.enc2(self.pool(b1))
         b3 = self.enc3(self.pool(b2))
         b4 = self.enc4(self.pool(b3))
 
-        # Feature difference
+
         f1 = torch.abs(a1 - b1)
         f2 = torch.abs(a2 - b2)
         f3 = torch.abs(a3 - b3)

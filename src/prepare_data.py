@@ -54,8 +54,7 @@ def main():
             if width != 1024 or height != 1024:
                 raise ValueError(f"Unexpected image size: {a}")
 
-            # Выбираем 8 равномерно распределённых
-            # координат из сетки 4 x 4.
+
             positions = [
                 (0, 0), (0, 256),
                 (256, 0), (256, 256),
