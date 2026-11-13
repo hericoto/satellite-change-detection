@@ -1,0 +1,24 @@
+experiment:
+  name: LEVIR-CD Building Change Detection
+  architecture: Siamese U-Net
+  dataset: LEVIR-CD
+
+data:
+  patch_size: 256
+  patches_per_image: 8
+  total_patches: 5096
+  train_samples: 3560
+  validation_samples: 512
+  test_samples: 1024
+
+training:
+  epochs: 20
+  batch_size: 8
+  learning_rate: 0.001
+  optimizer: Adam
+  loss:
+    - BCEWithLogitsLoss
+    - Dice Loss
+
+inference:
+  threshold: 0.5

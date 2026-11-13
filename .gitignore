@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+
+.venv/
+venv/
+env/
+
+data/
+*.zip
+
+.idea/
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
+
+weights/*.pth
+weights/*.pt
